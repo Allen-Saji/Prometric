@@ -1,18 +1,22 @@
 "use client";
 
+import { Fire } from "@phosphor-icons/react";
+
 interface StreakCounterProps {
   streak: number;
 }
 
 export function StreakCounter({ streak }: StreakCounterProps) {
-  const fireSize = streak >= 30 ? "text-5xl" : streak >= 14 ? "text-4xl" : streak >= 7 ? "text-3xl" : "text-2xl";
+  const iconSize = streak >= 30 ? 44 : streak >= 14 ? 38 : streak >= 7 ? 32 : 28;
 
   return (
-    <div className="flex items-center gap-2">
-      <span className={`${fireSize} animate-pulse`}>🔥</span>
+    <div className="flex items-center gap-3">
+      <div className="animate-flame">
+        <Fire size={iconSize} weight="duotone" className="text-amber-500" />
+      </div>
       <div>
-        <p className="text-3xl font-bold text-foreground">{streak}</p>
-        <p className="text-sm text-muted-foreground">day streak</p>
+        <p className="text-3xl font-heading font-bold text-foreground leading-none">{streak}</p>
+        <p className="text-xs text-muted-foreground mt-1">day streak</p>
       </div>
     </div>
   );

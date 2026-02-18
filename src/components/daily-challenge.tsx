@@ -7,8 +7,7 @@ import { getUserProfile, saveQuizAnswer, updateStreak } from "@/lib/firestore";
 import { QuizCard } from "./quiz-card";
 import { AnswerFeedback } from "./answer-feedback";
 import { ScoreSummary } from "./score-summary";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { ArrowRight } from "@phosphor-icons/react";
 
 export function DailyChallenge() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -65,7 +64,7 @@ export function DailyChallenge() {
   if (questions.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-pulse text-muted-foreground">Loading questions...</div>
+        <div className="text-muted-foreground font-medium">Loading questions...</div>
       </div>
     );
   }
@@ -83,10 +82,15 @@ export function DailyChallenge() {
       {/* Progress bar */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm text-muted-foreground">
-          <span>Question {currentIndex + 1} of {questions.length}</span>
-          <span>{answers.filter((a) => a.correct).length} correct</span>
+          <span className="font-medium">Question {currentIndex + 1} of {questions.length}</span>
+          <span className="text-emerald-500 font-medium">{answers.filter((a) => a.correct).length} correct</span>
         </div>
-        <Progress value={progressPercent} className="h-2 bg-secondary" />
+        <div className="w-full h-2 rounded-full bg-border/50 overflow-hidden">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-amber-500 to-amber-400 transition-all duration-500 ease-out"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
       </div>
 
       {/* Question */}
@@ -106,12 +110,13 @@ export function DailyChallenge() {
 
       {/* Next button */}
       {showResult && (
-        <Button
+        <button
           onClick={handleNext}
-          className="w-full bg-primary hover:bg-primary/90 text-black font-semibold py-6 text-lg"
+          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-400 text-white font-heading font-semibold py-4 text-lg rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-200"
         >
-          {currentIndex + 1 >= questions.length ? "See Results" : "Next Question →"}
-        </Button>
+          {currentIndex + 1 >= questions.length ? "See Results" : "Next Question"}
+          <ArrowRight size={20} weight="bold" />
+        </button>
       )}
     </div>
   );
