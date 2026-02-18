@@ -1,0 +1,15 @@
+"use client";
+
+import { Navbar } from "@/components/navbar";
+import { AuthGuard } from "@/components/auth-guard";
+
+export default function MainLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <AuthGuard>
+      <div className="min-h-screen bg-[#0A0A0B] pb-20">
+        {children}
+        <Navbar />
+      </div>
+    </AuthGuard>
+  );
+}
