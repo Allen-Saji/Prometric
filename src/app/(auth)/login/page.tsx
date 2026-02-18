@@ -54,19 +54,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
           <span className="text-4xl">🏥</span>
-          <h1 className="text-2xl font-bold text-[#FAFAFA] mt-4">Welcome to Prometric Hero</h1>
-          <p className="text-[#71717A] mt-2">Sign in to start your journey</p>
+          <h1 className="text-2xl font-bold text-foreground mt-4">Welcome to Prometric Hero</h1>
+          <p className="text-muted-foreground mt-2">Sign in to start your journey</p>
         </div>
 
         <Button
           onClick={handleGoogle}
           disabled={loading}
           variant="outline"
-          className="w-full border-[#1F1F23] text-[#FAFAFA] hover:bg-[#141416] py-6"
+          className="w-full border-border text-foreground hover:bg-accent py-6"
         >
           <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -78,48 +78,48 @@ export default function LoginPage() {
         </Button>
 
         <div className="flex items-center gap-3">
-          <div className="flex-1 h-px bg-[#1F1F23]" />
-          <span className="text-xs text-[#71717A]">or</span>
-          <div className="flex-1 h-px bg-[#1F1F23]" />
+          <div className="flex-1 h-px bg-border" />
+          <span className="text-xs text-muted-foreground">or</span>
+          <div className="flex-1 h-px bg-border" />
         </div>
 
         <form onSubmit={handleEmail} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-[#FAFAFA]">Email</Label>
+            <Label htmlFor="email" className="text-foreground">Email</Label>
             <Input
               id="email"
               type="email"
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-[#141416] border-[#1F1F23] text-[#FAFAFA] placeholder:text-[#71717A]"
+              className="bg-card border-border text-foreground placeholder:text-muted-foreground"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-[#FAFAFA]">Password</Label>
+            <Label htmlFor="password" className="text-foreground">Password</Label>
             <Input
               id="password"
               type="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-[#141416] border-[#1F1F23] text-[#FAFAFA] placeholder:text-[#71717A]"
+              className="bg-card border-border text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
-          {error && <p className="text-sm text-[#EF4444]">{error}</p>}
+          {error && <p className="text-sm text-destructive">{error}</p>}
 
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#F5A524] hover:bg-[#F5A524]/90 text-black font-semibold py-6"
+            className="w-full bg-primary hover:bg-primary/90 text-black font-semibold py-6"
           >
             {loading ? "Signing in..." : "Sign In"}
           </Button>
         </form>
 
-        <p className="text-center text-sm text-[#71717A]">
-          <Link href="/" className="hover:text-[#FAFAFA] transition-colors">← Back to home</Link>
+        <p className="text-center text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground transition-colors">← Back to home</Link>
         </p>
       </div>
     </div>

@@ -26,7 +26,7 @@ export function AnswerFeedback({ correct, explanation, visible }: AnswerFeedback
           {correct ? "Correct!" : "Incorrect"}
         </span>
       </div>
-      <p className="text-sm text-[#71717A] leading-relaxed">{explanation}</p>
+      <p className="text-sm text-muted-foreground leading-relaxed">{explanation}</p>
     </div>
   );
 }

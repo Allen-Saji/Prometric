@@ -6,7 +6,7 @@ import { AuthGuard } from "@/components/auth-guard";
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-[#0A0A0B] pb-20">
+      <div className="min-h-screen bg-background pb-20">
         {children}
         <Navbar />
       </div>

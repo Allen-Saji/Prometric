@@ -18,7 +18,7 @@ export function ProgressRing({ progress, size = 120, strokeWidth = 8 }: Progress
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#1F1F23"
+          stroke="var(--border)"
           strokeWidth={strokeWidth}
           fill="none"
         />
@@ -26,7 +26,7 @@ export function ProgressRing({ progress, size = 120, strokeWidth = 8 }: Progress
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#F5A524"
+          stroke="var(--primary)"
           strokeWidth={strokeWidth}
           fill="none"
           strokeLinecap="round"
@@ -36,7 +36,7 @@ export function ProgressRing({ progress, size = 120, strokeWidth = 8 }: Progress
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-2xl font-bold text-[#FAFAFA]">{Math.round(progress)}%</span>
+        <span className="text-2xl font-bold text-foreground">{Math.round(progress)}%</span>
       </div>
     </div>
   );

@@ -11,8 +11,8 @@ export function StreakCounter({ streak }: StreakCounterProps) {
     <div className="flex items-center gap-2">
       <span className={`${fireSize} animate-pulse`}>🔥</span>
       <div>
-        <p className="text-3xl font-bold text-[#FAFAFA]">{streak}</p>
-        <p className="text-sm text-[#71717A]">day streak</p>
+        <p className="text-3xl font-bold text-foreground">{streak}</p>
+        <p className="text-sm text-muted-foreground">day streak</p>
       </div>
     </div>
   );

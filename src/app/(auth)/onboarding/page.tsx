@@ -51,19 +51,19 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="w-full max-w-md space-y-8">
         {/* Step indicator */}
         <div className="flex items-center justify-center gap-2">
-          <div className={cn("w-8 h-1 rounded-full", step >= 1 ? "bg-[#F5A524]" : "bg-[#1F1F23]")} />
-          <div className={cn("w-8 h-1 rounded-full", step >= 2 ? "bg-[#F5A524]" : "bg-[#1F1F23]")} />
+          <div className={cn("w-8 h-1 rounded-full", step >= 1 ? "bg-primary" : "bg-border")} />
+          <div className={cn("w-8 h-1 rounded-full", step >= 2 ? "bg-primary" : "bg-border")} />
         </div>
 
         {step === 1 && (
           <div className="space-y-6">
             <div className="text-center">
-              <h1 className="text-2xl font-bold text-[#FAFAFA]">Which exam are you preparing for?</h1>
-              <p className="text-[#71717A] mt-2">We&apos;ll tailor your questions</p>
+              <h1 className="text-2xl font-bold text-foreground">Which exam are you preparing for?</h1>
+              <p className="text-muted-foreground mt-2">We&apos;ll tailor your questions</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
@@ -74,12 +74,12 @@ export default function OnboardingPage() {
                   className={cn(
                     "p-6 rounded-xl border text-center transition-all",
                     selectedExam === exam.id
-                      ? "border-[#F5A524] bg-[#F5A524]/10"
-                      : "border-[#1F1F23] bg-[#141416] hover:border-[#F5A524]/50"
+                      ? "border-primary bg-primary/10"
+                      : "border-border bg-card hover:border-primary/50"
                   )}
                 >
-                  <p className="text-xl font-bold text-[#FAFAFA]">{exam.label}</p>
-                  <p className="text-xs text-[#71717A] mt-1">{exam.region}</p>
+                  <p className="text-xl font-bold text-foreground">{exam.label}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{exam.region}</p>
                 </button>
               ))}
             </div>
@@ -89,8 +89,8 @@ export default function OnboardingPage() {
         {step === 2 && (
           <div className="space-y-6">
             <div className="text-center">
-              <h1 className="text-2xl font-bold text-[#FAFAFA]">What&apos;s your specialty?</h1>
-              <p className="text-[#71717A] mt-2">Pick your field of practice</p>
+              <h1 className="text-2xl font-bold text-foreground">What&apos;s your specialty?</h1>
+              <p className="text-muted-foreground mt-2">Pick your field of practice</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
@@ -101,12 +101,12 @@ export default function OnboardingPage() {
                   className={cn(
                     "p-6 rounded-xl border text-center transition-all",
                     selectedSpecialty === spec.id
-                      ? "border-[#F5A524] bg-[#F5A524]/10"
-                      : "border-[#1F1F23] bg-[#141416] hover:border-[#F5A524]/50"
+                      ? "border-primary bg-primary/10"
+                      : "border-border bg-card hover:border-primary/50"
                   )}
                 >
                   <span className="text-3xl">{spec.emoji}</span>
-                  <p className="text-sm font-medium text-[#FAFAFA] mt-2">{spec.label}</p>
+                  <p className="text-sm font-medium text-foreground mt-2">{spec.label}</p>
                 </button>
               ))}
             </div>
@@ -116,7 +116,7 @@ export default function OnboardingPage() {
         <Button
           onClick={handleContinue}
           disabled={(step === 1 && !selectedExam) || (step === 2 && !selectedSpecialty)}
-          className="w-full bg-[#F5A524] hover:bg-[#F5A524]/90 text-black font-semibold py-6 disabled:opacity-40"
+          className="w-full bg-primary hover:bg-primary/90 text-black font-semibold py-6 disabled:opacity-40"
         >
           {step === 2 ? "Start My Journey →" : "Continue →"}
         </Button>

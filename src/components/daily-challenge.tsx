@@ -65,7 +65,7 @@ export function DailyChallenge() {
   if (questions.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-pulse text-[#71717A]">Loading questions...</div>
+        <div className="animate-pulse text-muted-foreground">Loading questions...</div>
       </div>
     );
   }
@@ -82,11 +82,11 @@ export function DailyChallenge() {
     <div className="space-y-6">
       {/* Progress bar */}
       <div className="space-y-2">
-        <div className="flex justify-between text-sm text-[#71717A]">
+        <div className="flex justify-between text-sm text-muted-foreground">
           <span>Question {currentIndex + 1} of {questions.length}</span>
           <span>{answers.filter((a) => a.correct).length} correct</span>
         </div>
-        <Progress value={progressPercent} className="h-2 bg-[#1F1F23]" />
+        <Progress value={progressPercent} className="h-2 bg-secondary" />
       </div>
 
       {/* Question */}
@@ -108,7 +108,7 @@ export function DailyChallenge() {
       {showResult && (
         <Button
           onClick={handleNext}
-          className="w-full bg-[#F5A524] hover:bg-[#F5A524]/90 text-black font-semibold py-6 text-lg"
+          className="w-full bg-primary hover:bg-primary/90 text-black font-semibold py-6 text-lg"
         >
           {currentIndex + 1 >= questions.length ? "See Results" : "Next Question →"}
         </Button>

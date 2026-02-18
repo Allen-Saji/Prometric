@@ -24,36 +24,36 @@ export function ScoreSummary({ correct, total, timeSpent }: ScoreSummaryProps) {
 
   return (
     <div className="flex flex-col items-center text-center space-y-6 p-6">
-      <h2 className="text-2xl font-bold text-[#FAFAFA]">Challenge Complete!</h2>
-      <p className="text-xl text-[#F5A524]">{getMessage()}</p>
+      <h2 className="text-2xl font-bold text-foreground">Challenge Complete!</h2>
+      <p className="text-xl text-primary">{getMessage()}</p>
 
       <ProgressRing progress={percentage} size={160} strokeWidth={10} />
 
       <div className="grid grid-cols-3 gap-6 w-full max-w-sm">
         <div>
           <p className="text-2xl font-bold text-[#22C55E]">{correct}</p>
-          <p className="text-xs text-[#71717A]">Correct</p>
+          <p className="text-xs text-muted-foreground">Correct</p>
         </div>
         <div>
           <p className="text-2xl font-bold text-[#EF4444]">{total - correct}</p>
-          <p className="text-xs text-[#71717A]">Wrong</p>
+          <p className="text-xs text-muted-foreground">Wrong</p>
         </div>
         <div>
-          <p className="text-2xl font-bold text-[#FAFAFA]">
+          <p className="text-2xl font-bold text-foreground">
             {minutes}:{seconds.toString().padStart(2, "0")}
           </p>
-          <p className="text-xs text-[#71717A]">Time</p>
+          <p className="text-xs text-muted-foreground">Time</p>
         </div>
       </div>
 
       <div className="flex flex-col gap-3 w-full max-w-sm">
         <Link href="/challenge/review">
-          <Button className="w-full bg-[#F5A524] hover:bg-[#F5A524]/90 text-black font-semibold">
+          <Button className="w-full bg-primary hover:bg-primary/90 text-black font-semibold">
             Review Answers
           </Button>
         </Link>
         <Link href="/dashboard">
-          <Button variant="outline" className="w-full border-[#1F1F23] text-[#FAFAFA]">
+          <Button variant="outline" className="w-full border-border text-foreground">
             Back to Dashboard
           </Button>
         </Link>

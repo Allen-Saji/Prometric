@@ -29,9 +29,9 @@ export default function ReviewPage() {
   if (!progress || progress.answers.length === 0) {
     return (
       <div className="px-6 py-8 max-w-md mx-auto text-center space-y-4">
-        <p className="text-[#71717A]">No answers to review yet.</p>
+        <p className="text-muted-foreground">No answers to review yet.</p>
         <Link href="/challenge">
-          <Button className="bg-[#F5A524] hover:bg-[#F5A524]/90 text-black font-semibold">
+          <Button className="bg-primary hover:bg-primary/90 text-black font-semibold">
             Start Challenge
           </Button>
         </Link>
@@ -45,11 +45,11 @@ export default function ReviewPage() {
     <div className="px-6 py-8 max-w-md mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <Link href="/dashboard">
-          <ArrowLeft className="text-[#71717A] hover:text-[#FAFAFA]" size={20} />
+          <ArrowLeft className="text-muted-foreground hover:text-foreground" size={20} />
         </Link>
         <div>
-          <h1 className="text-xl font-bold text-[#FAFAFA]">Today&apos;s Review</h1>
-          <p className="text-sm text-[#71717A]">
+          <h1 className="text-xl font-bold text-foreground">Today&apos;s Review</h1>
+          <p className="text-sm text-muted-foreground">
             {correct}/{progress.answers.length} correct ({Math.round((correct / progress.answers.length) * 100)}%)
           </p>
         </div>
@@ -80,20 +80,20 @@ export default function ReviewPage() {
                   {answer.correct ? "✓" : "✗"}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-[#FAFAFA] font-medium">
+                  <p className="text-sm text-foreground font-medium">
                     Q{index + 1}. {question.text.substring(0, 80)}...
                   </p>
                 </div>
                 {isExpanded ? (
-                  <ChevronUp className="text-[#71717A] shrink-0" size={16} />
+                  <ChevronUp className="text-muted-foreground shrink-0" size={16} />
                 ) : (
-                  <ChevronDown className="text-[#71717A] shrink-0" size={16} />
+                  <ChevronDown className="text-muted-foreground shrink-0" size={16} />
                 )}
               </button>
 
               {isExpanded && (
-                <div className="px-4 pb-4 space-y-3 border-t border-[#1F1F23]/50">
-                  <p className="text-sm text-[#FAFAFA] mt-3">{question.text}</p>
+                <div className="px-4 pb-4 space-y-3 border-t border-border/50">
+                  <p className="text-sm text-foreground mt-3">{question.text}</p>
                   <div className="space-y-1">
                     {question.options.map((opt, i) => (
                       <div
@@ -110,7 +110,7 @@ export default function ReviewPage() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-[#71717A] leading-relaxed">{question.explanation}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{question.explanation}</p>
                 </div>
               )}
             </div>
@@ -119,7 +119,7 @@ export default function ReviewPage() {
       </div>
 
       <Link href="/dashboard">
-        <Button variant="outline" className="w-full border-[#1F1F23] text-[#FAFAFA]">
+        <Button variant="outline" className="w-full border-border text-foreground">
           Back to Dashboard
         </Button>
       </Link>

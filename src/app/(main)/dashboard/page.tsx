@@ -28,10 +28,10 @@ export default function DashboardPage() {
     <div className="px-6 py-8 max-w-md mx-auto space-y-6">
       {/* Greeting */}
       <div>
-        <h1 className="text-2xl font-bold text-[#FAFAFA]">
+        <h1 className="text-2xl font-bold text-foreground">
           Day {day}/45 — Keep going! 🔥
         </h1>
-        <p className="text-[#71717A] mt-1">
+        <p className="text-muted-foreground mt-1">
           {profile?.exam} · {profile?.specialty ? profile.specialty.charAt(0).toUpperCase() + profile.specialty.slice(1) : ""}
         </p>
       </div>
@@ -40,7 +40,7 @@ export default function DashboardPage() {
       <PaywallBanner />
 
       {/* Streak + Progress ring */}
-      <div className="flex items-center justify-around bg-[#141416] border border-[#1F1F23] rounded-xl p-6">
+      <div className="flex items-center justify-around bg-card border border-border rounded-xl p-6">
         <StreakCounter streak={profile?.streak || 0} />
         <ProgressRing progress={todayComplete} />
       </div>
@@ -48,7 +48,7 @@ export default function DashboardPage() {
       {/* Start Challenge */}
       {todayComplete < 100 ? (
         <Link href="/challenge">
-          <Button className="w-full bg-[#F5A524] hover:bg-[#F5A524]/90 text-black font-semibold py-7 text-lg">
+          <Button className="w-full bg-primary hover:bg-primary/90 text-black font-semibold py-7 text-lg">
             {todayProgress && todayProgress.questionsAnswered > 0
               ? `Continue Challenge (${todayProgress.questionsAnswered}/10)`
               : "Start Today's Challenge"}
@@ -56,7 +56,7 @@ export default function DashboardPage() {
         </Link>
       ) : (
         <Link href="/challenge/review">
-          <Button variant="outline" className="w-full border-[#1F1F23] text-[#FAFAFA] py-7 text-lg">
+          <Button variant="outline" className="w-full border-border text-foreground py-7 text-lg">
             ✅ Today Complete — Review Answers
           </Button>
         </Link>
@@ -64,20 +64,20 @@ export default function DashboardPage() {
 
       {/* Quick stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="bg-[#141416] border border-[#1F1F23] rounded-xl p-4 text-center">
-          <Target className="mx-auto text-[#F5A524] mb-2" size={20} />
-          <p className="text-xl font-bold text-[#FAFAFA]">{stats.totalAnswered}</p>
-          <p className="text-xs text-[#71717A]">Answered</p>
+        <div className="bg-card border border-border rounded-xl p-4 text-center">
+          <Target className="mx-auto text-primary mb-2" size={20} />
+          <p className="text-xl font-bold text-foreground">{stats.totalAnswered}</p>
+          <p className="text-xs text-muted-foreground">Answered</p>
         </div>
-        <div className="bg-[#141416] border border-[#1F1F23] rounded-xl p-4 text-center">
+        <div className="bg-card border border-border rounded-xl p-4 text-center">
           <CheckCircle className="mx-auto text-[#22C55E] mb-2" size={20} />
-          <p className="text-xl font-bold text-[#FAFAFA]">{stats.accuracy}%</p>
-          <p className="text-xs text-[#71717A]">Accuracy</p>
+          <p className="text-xl font-bold text-foreground">{stats.accuracy}%</p>
+          <p className="text-xs text-muted-foreground">Accuracy</p>
         </div>
-        <div className="bg-[#141416] border border-[#1F1F23] rounded-xl p-4 text-center">
-          <TrendingUp className="mx-auto text-[#F5A524] mb-2" size={20} />
-          <p className="text-xl font-bold text-[#FAFAFA]">{profile?.longestStreak || 0}</p>
-          <p className="text-xs text-[#71717A]">Best Streak</p>
+        <div className="bg-card border border-border rounded-xl p-4 text-center">
+          <TrendingUp className="mx-auto text-primary mb-2" size={20} />
+          <p className="text-xl font-bold text-foreground">{profile?.longestStreak || 0}</p>
+          <p className="text-xs text-muted-foreground">Best Streak</p>
         </div>
       </div>
     </div>

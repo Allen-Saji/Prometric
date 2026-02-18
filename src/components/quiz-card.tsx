@@ -13,7 +13,7 @@ interface QuizCardProps {
 export function QuizCard({ question, selectedAnswer, onSelect, showResult }: QuizCardProps) {
   return (
     <div className="space-y-6">
-      <p className="text-lg font-medium text-[#FAFAFA] leading-relaxed">
+      <p className="text-lg font-medium text-foreground leading-relaxed">
         {question.text}
       </p>
       <div className="space-y-3">
@@ -32,9 +32,9 @@ export function QuizCard({ question, selectedAnswer, onSelect, showResult }: Qui
               disabled={showResult}
               className={cn(
                 "w-full text-left p-4 rounded-xl border transition-all duration-200",
-                "text-[#FAFAFA] font-medium",
-                variant === "default" && "border-[#1F1F23] bg-[#141416] hover:border-[#F5A524]/50 hover:bg-[#141416]/80",
-                variant === "selected" && "border-[#F5A524] bg-[#F5A524]/10",
+                "text-foreground font-medium",
+                variant === "default" && "border-border bg-card hover:border-primary/50",
+                variant === "selected" && "border-primary bg-primary/10",
                 variant === "correct" && "border-[#22C55E] bg-[#22C55E]/10 text-[#22C55E]",
                 variant === "wrong" && "border-[#EF4444] bg-[#EF4444]/10 text-[#EF4444]",
                 showResult && "cursor-default"
