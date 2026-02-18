@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, BookOpen, ChartLineUp, GearSix } from "@phosphor-icons/react";
+import { House, Timer, Sword, ChatCircle, GearSix } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/dashboard", label: "Home", icon: House },
-  { href: "/practice", label: "Practice", icon: BookOpen },
-  { href: "/progress", label: "Progress", icon: ChartLineUp },
+  { href: "/practice", label: "Practice", icon: Timer },
+  { href: "/battle", label: "Battle", icon: Sword },
+  { href: "/community", label: "Community", icon: ChatCircle },
   { href: "/settings", label: "Settings", icon: GearSix },
 ];
 
@@ -25,7 +26,7 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "relative flex flex-col items-center gap-0.5 px-4 py-2.5 rounded-xl transition-all duration-200",
+                "relative flex flex-col items-center gap-0.5 px-3 py-2.5 rounded-xl transition-all duration-200",
                 active ? "text-amber-500" : "text-muted-foreground hover:text-foreground"
               )}
             >

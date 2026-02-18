@@ -22,6 +22,11 @@ export interface UserProfile {
   streak: number;
   longestStreak: number;
   currentDay: number;
+  xp: number;
+  level: number;
+  hearts: number;
+  heartsLastRegen: number;
+  battleHistory: BattleResult[];
 }
 
 export interface DailyProgress {
@@ -37,6 +42,20 @@ export interface QuizAnswer {
   selectedAnswer: number;
   correct: boolean;
   timeSpent: number;
+}
+
+export interface XPEvent {
+  type: 'correct_answer' | 'daily_complete' | 'perfect_score' | 'streak_bonus' | 'battle_win' | 'battle_loss' | 'battle_draw';
+  amount: number;
+  timestamp: number;
+}
+
+export interface BattleResult {
+  date: string;
+  playerScore: number;
+  opponentScore: number;
+  xpEarned: number;
+  won: boolean;
 }
 
 export type Exam = "DHA" | "MOH" | "SLE" | "HAAD";

@@ -11,7 +11,15 @@ function getTodayKey(): string {
 export function getUserProfile(): UserProfile | null {
   if (typeof window === "undefined") return null;
   const data = localStorage.getItem(PROFILE_KEY);
-  return data ? JSON.parse(data) : null;
+  if (!data) return null;
+  const profile = JSON.parse(data);
+  // Ensure new fields have defaults
+  if (profile.xp === undefined) profile.xp = 0;
+  if (profile.level === undefined) profile.level = 1;
+  if (profile.hearts === undefined) profile.hearts = 5;
+  if (profile.heartsLastRegen === undefined) profile.heartsLastRegen = Date.now();
+  if (profile.battleHistory === undefined) profile.battleHistory = [];
+  return profile;
 }
 
 export function saveUserProfile(profile: UserProfile): void {

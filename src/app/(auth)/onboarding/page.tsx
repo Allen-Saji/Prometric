@@ -44,6 +44,11 @@ export default function OnboardingPage() {
         streak: 0,
         longestStreak: 0,
         currentDay: 1,
+        xp: 0,
+        level: 1,
+        hearts: 5,
+        heartsLastRegen: Date.now(),
+        battleHistory: [],
       });
 
       router.push("/dashboard");
