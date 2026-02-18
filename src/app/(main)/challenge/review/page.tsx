@@ -64,7 +64,7 @@ export default function ReviewPage() {
 
           return (
             <div
-              key={answer.questionId}
+              key={`${answer.questionId}-${index}`}
               className={cn(
                 "glass-card rounded-2xl overflow-hidden transition-all",
                 answer.correct ? "!border-emerald-500/20" : "!border-rose-500/20"
