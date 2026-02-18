@@ -2,10 +2,10 @@ import Link from "next/link";
 import { ArrowRight, Stethoscope, Lightning, Target, Trophy, ShieldCheck, Users, BookOpen } from "@phosphor-icons/react/dist/ssr";
 
 const exams = [
-  { name: "DHA", flag: "\u{1F1E6}\u{1F1EA}", label: "Dubai" },
-  { name: "MOH", flag: "\u{1F1E6}\u{1F1EA}", label: "UAE" },
-  { name: "SLE", flag: "\u{1F1F8}\u{1F1E6}", label: "Saudi" },
-  { name: "HAAD", flag: "\u{1F1E6}\u{1F1EA}", label: "Abu Dhabi" },
+  { name: "DHA", label: "Dubai" },
+  { name: "MOH", label: "UAE" },
+  { name: "SLE", label: "Saudi" },
+  { name: "HAAD", label: "Abu Dhabi" },
 ];
 
 const features = [
@@ -55,7 +55,6 @@ export default function LandingPage() {
                 key={exam.name}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium glass-card text-foreground/80"
               >
-                <span className="text-sm">{exam.flag}</span>
                 {exam.name}
               </span>
             ))}

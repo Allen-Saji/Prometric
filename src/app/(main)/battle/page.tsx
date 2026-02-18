@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Sword, Lightning } from "@phosphor-icons/react";
+import { Sword, Lightning, Trophy, Equals } from "@phosphor-icons/react";
 import { BattleMatchmaking } from "@/components/battle-matchmaking";
 import { BattleQuestion } from "@/components/battle-question";
 import { BattleResult } from "@/components/battle-result";
@@ -107,15 +107,15 @@ export default function BattlePage() {
 
         <div className="glass-card rounded-2xl p-4 w-full space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">🏆 Win</span>
+            <span className="text-muted-foreground flex items-center gap-1.5"><Trophy size={16} weight="duotone" className="text-amber-500" /> Win</span>
             <span className="font-heading font-bold text-amber-500">+100 XP</span>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">🤝 Draw</span>
+            <span className="text-muted-foreground flex items-center gap-1.5"><Equals size={16} weight="bold" className="text-sky-500" /> Draw</span>
             <span className="font-heading font-bold text-sky-500">+50 XP</span>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">💪 Lose</span>
+            <span className="text-muted-foreground flex items-center gap-1.5"><Sword size={16} weight="duotone" className="text-zinc-400" /> Lose</span>
             <span className="font-heading font-bold text-muted-foreground">+20 XP</span>
           </div>
         </div>

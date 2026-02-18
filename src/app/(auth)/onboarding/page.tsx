@@ -7,11 +7,11 @@ import { Exam, Specialty } from "@/lib/types";
 import { Stethoscope, FirstAid, Pill, Tooth } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
-const exams: { id: Exam; label: string; region: string; flag: string; fullName: string }[] = [
-  { id: "DHA", label: "DHA", region: "Dubai", flag: "\u{1F1E6}\u{1F1EA}", fullName: "Dubai Health Authority" },
-  { id: "MOH", label: "MOH", region: "UAE Federal", flag: "\u{1F1E6}\u{1F1EA}", fullName: "Ministry of Health" },
-  { id: "SLE", label: "SLE", region: "Saudi Arabia", flag: "\u{1F1F8}\u{1F1E6}", fullName: "Saudi Licensing Exam" },
-  { id: "HAAD", label: "HAAD", region: "Abu Dhabi", flag: "\u{1F1E6}\u{1F1EA}", fullName: "Dept. of Health" },
+const exams: { id: Exam; label: string; region: string; fullName: string }[] = [
+  { id: "DHA", label: "DHA", region: "Dubai", fullName: "Dubai Health Authority" },
+  { id: "MOH", label: "MOH", region: "UAE Federal", fullName: "Ministry of Health" },
+  { id: "SLE", label: "SLE", region: "Saudi Arabia", fullName: "Saudi Licensing Exam" },
+  { id: "HAAD", label: "HAAD", region: "Abu Dhabi", fullName: "Dept. of Health" },
 ];
 
 const specialties: { id: Specialty; label: string; icon: typeof Stethoscope }[] = [
@@ -92,7 +92,6 @@ export default function OnboardingPage() {
                       : "hover:border-amber-500/30"
                   )}
                 >
-                  <span className="text-2xl mb-2 block">{exam.flag}</span>
                   <p className="text-xl font-heading font-bold text-foreground">{exam.label}</p>
                   <p className="text-xs text-muted-foreground mt-1">{exam.fullName}</p>
                   <p className="text-[10px] text-muted-foreground/60 mt-0.5">{exam.region}</p>

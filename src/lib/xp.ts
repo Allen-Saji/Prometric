@@ -4,14 +4,14 @@ import { getUserProfile, saveUserProfile } from "./firestore";
 const XP_EVENTS_KEY = "xp-events";
 
 export const LEVELS = [
-  { level: 1, title: "Intern", emoji: "🌱", minXP: 0, maxXP: 100 },
-  { level: 2, title: "Trainee", emoji: "📚", minXP: 100, maxXP: 300 },
-  { level: 3, title: "Pharmacist", emoji: "💊", minXP: 300, maxXP: 600 },
-  { level: 4, title: "Senior RPh", emoji: "⚡", minXP: 600, maxXP: 1000 },
-  { level: 5, title: "Specialist", emoji: "🏅", minXP: 1000, maxXP: 1500 },
-  { level: 6, title: "Expert", emoji: "🏆", minXP: 1500, maxXP: 2200 },
-  { level: 7, title: "Master", emoji: "👑", minXP: 2200, maxXP: 3000 },
-  { level: 8, title: "Pharma Hero", emoji: "💎", minXP: 3000, maxXP: Infinity },
+  { level: 1, title: "Intern", icon: "Plant", minXP: 0, maxXP: 100 },
+  { level: 2, title: "Trainee", icon: "BookOpen", minXP: 100, maxXP: 300 },
+  { level: 3, title: "Pharmacist", icon: "Pill", minXP: 300, maxXP: 600 },
+  { level: 4, title: "Senior RPh", icon: "Lightning", minXP: 600, maxXP: 1000 },
+  { level: 5, title: "Specialist", icon: "Medal", minXP: 1000, maxXP: 1500 },
+  { level: 6, title: "Expert", icon: "Trophy", minXP: 1500, maxXP: 2200 },
+  { level: 7, title: "Master", icon: "Crown", minXP: 2200, maxXP: 3000 },
+  { level: 8, title: "Pharma Hero", icon: "Diamond", minXP: 3000, maxXP: Infinity },
 ];
 
 export function getLevelInfo(xp: number) {

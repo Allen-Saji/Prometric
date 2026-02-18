@@ -1,6 +1,7 @@
 "use client";
 
 import { getLevelInfo } from "@/lib/xp";
+import { LevelIcon } from "@/components/level-icon";
 
 interface XPBarProps {
   xp: number;
@@ -13,7 +14,7 @@ export function XPBar({ xp }: XPBarProps) {
     <div className="glass-card rounded-2xl p-4 space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xl">{level.emoji}</span>
+          <LevelIcon name={level.icon} size={24} className="text-amber-500" />
           <div>
             <p className="text-sm font-heading font-bold text-foreground">
               Level {level.level} — {level.title}

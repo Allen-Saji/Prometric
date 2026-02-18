@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ProgressRing } from "./progress-ring";
-import { Trophy, BookOpen, ArrowRight, Lightning } from "@phosphor-icons/react";
+import { Trophy, BookOpen, ArrowRight, Lightning, Crosshair, Fire } from "@phosphor-icons/react";
 import { getUserProfile } from "@/lib/firestore";
 
 interface ScoreSummaryProps {
@@ -78,13 +78,13 @@ export function ScoreSummary({ correct, total, timeSpent }: ScoreSummaryProps) {
           </div>
           {perfectXP > 0 && (
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Perfect score 🎯</span>
+              <span className="text-muted-foreground flex items-center gap-1">Perfect score <Crosshair size={14} weight="bold" className="text-amber-500" /></span>
               <span className="font-medium text-amber-500">+{perfectXP}</span>
             </div>
           )}
           {streakXP > 0 && (
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Streak bonus 🔥</span>
+              <span className="text-muted-foreground flex items-center gap-1">Streak bonus <Fire size={14} weight="fill" className="text-amber-500" /></span>
               <span className="font-medium text-amber-500">+{streakXP}</span>
             </div>
           )}
