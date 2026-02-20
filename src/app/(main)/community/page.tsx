@@ -1,70 +1,78 @@
 "use client";
 
-import { useState } from "react";
-import { ChatCircle, EnvelopeSimple, Check } from "@phosphor-icons/react";
+import { useState, useEffect } from "react";
+import { getUserProfile } from "@/lib/firestore";
+import { getDaySchedule } from "@/lib/gulf-schedule";
+import { LoungeThread } from "@/components/lounge-thread";
+import { ChatCircle, ArrowLeft, ChatTeardrop } from "@phosphor-icons/react";
 
 export default function CommunityPage() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [unlockedDay, setUnlockedDay] = useState(1);
+  const [activeThread, setActiveThread] = useState<number | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    const emails = JSON.parse(localStorage.getItem("community-emails") || "[]");
-    emails.push(email);
-    localStorage.setItem("community-emails", JSON.stringify(emails));
-    setSubmitted(true);
-  };
+  useEffect(() => {
+    const profile = getUserProfile();
+    setUnlockedDay(profile?.unlockedDay || profile?.currentDay || 1);
+  }, []);
+
+  if (activeThread !== null) {
+    const schedule = getDaySchedule(activeThread);
+    return (
+      <div className="px-6 py-8 max-w-md mx-auto space-y-4">
+        <button
+          onClick={() => setActiveThread(null)}
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft size={16} weight="bold" />
+          Back to Lounge
+        </button>
+        <div>
+          <h1 className="text-xl font-heading font-bold text-foreground">Day {activeThread}</h1>
+          <p className="text-sm text-muted-foreground">{schedule?.topics.join(", ") || "Discussion"}</p>
+        </div>
+        <LoungeThread dayNumber={activeThread} />
+      </div>
+    );
+  }
 
   return (
-    <div className="px-6 py-8 max-w-md mx-auto space-y-8">
+    <div className="px-6 py-8 max-w-md mx-auto space-y-6">
       <div className="animate-fade-up animate-fade-up-1">
-        <h1 className="text-2xl font-heading font-bold text-foreground">Community</h1>
-        <p className="text-sm text-muted-foreground mt-1">Connect with fellow exam preppers</p>
+        <h1 className="text-2xl font-heading font-bold text-foreground">The Lounge</h1>
+        <p className="text-sm text-muted-foreground mt-1">Discuss topics with fellow students</p>
       </div>
 
-      <div className="flex flex-col items-center text-center space-y-6 animate-fade-up animate-fade-up-2 pt-8">
-        <div className="w-28 h-28 rounded-full bg-gradient-to-br from-amber-500/20 to-amber-400/10 flex items-center justify-center">
-          <ChatCircle size={56} weight="duotone" className="text-amber-500" />
-        </div>
-
-        <div className="space-y-2">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-500 border border-amber-500/20">
-            Coming Soon
-          </span>
-          <h2 className="text-xl font-heading font-bold text-foreground">Study Groups & Discussions</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Study groups, discussions, and peer support — launching soon
-          </p>
-        </div>
-
-        {submitted ? (
-          <div className="glass-card rounded-2xl p-5 w-full flex items-center gap-3">
-            <Check size={24} weight="bold" className="text-emerald-500" />
-            <p className="text-sm font-medium text-foreground">You&apos;ll be notified when we launch!</p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="w-full space-y-3">
-            <div className="relative">
-              <EnvelopeSimple size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl glass-card text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50"
-                required
-              />
-            </div>
+      <div className="space-y-2 animate-fade-up animate-fade-up-2">
+        {Array.from({ length: unlockedDay }, (_, i) => i + 1).map((day) => {
+          const schedule = getDaySchedule(day);
+          return (
             <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-amber-500 to-amber-400 text-white font-heading font-semibold py-3.5 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-200"
+              key={day}
+              onClick={() => setActiveThread(day)}
+              className="w-full glass-card rounded-xl px-4 py-3 flex items-center gap-3 text-left hover:scale-[1.01] transition-all"
             >
-              Get Notified
+              <div className="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0">
+                <ChatTeardrop size={18} weight="duotone" className="text-amber-500" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-heading font-semibold text-foreground">Day {day}</p>
+                <p className="text-[11px] text-muted-foreground truncate">
+                  {schedule?.topics.join(", ") || "Discussion"}
+                </p>
+              </div>
             </button>
-          </form>
-        )}
+          );
+        })}
       </div>
+
+      {unlockedDay === 0 && (
+        <div className="flex flex-col items-center text-center space-y-4 pt-8">
+          <div className="w-20 h-20 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <ChatCircle size={40} weight="duotone" className="text-amber-500" />
+          </div>
+          <p className="text-sm text-muted-foreground">Complete Day 1 to unlock the Lounge</p>
+        </div>
+      )}
     </div>
   );
 }
