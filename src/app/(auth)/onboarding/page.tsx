@@ -49,6 +49,9 @@ export default function OnboardingPage() {
         hearts: 5,
         heartsLastRegen: Date.now(),
         battleHistory: [],
+        heroCredits: 0,
+        mockTestTokens: 2,
+        unlockedDay: 1,
       });
 
       router.push("/dashboard");
