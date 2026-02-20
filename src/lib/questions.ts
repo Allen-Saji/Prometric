@@ -1,45 +1,61 @@
 import { Question, UserProfile } from "./types";
 import { seedQuestions } from "./seed-questions";
+import { getReviewQuestions } from "./ghost-rule";
+import { getWorldForDay } from "./gulf-schedule";
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export function selectDailyQuestions(
   profile: UserProfile | null,
-  count: number = 10
+  count: number = 50,
+  dayNumber?: number
 ): Question[] {
-  let pool = [...seedQuestions];
+  const day = dayNumber || profile?.currentDay || 1;
 
-  // Filter by user's exam and specialty
-  if (profile) {
-    const filtered = pool.filter(
-      (q) => q.exam === profile.exam && q.specialty === profile.specialty
-    );
-    // If not enough matching questions, broaden the filter
-    if (filtered.length >= count) {
-      pool = filtered;
-    } else {
-      const byExam = pool.filter((q) => q.exam === profile.exam);
-      if (byExam.length >= count) {
-        pool = byExam;
-      }
-    }
+  // Ghost rule: first 10 are review from prior worlds (if day > 6)
+  const reviewQs = getReviewQuestions(day, 10);
 
-    // Phase selection based on current day
-    const day = profile.currentDay || 1;
-    let phase: 1 | 2 | 3;
-    if (day <= 15) phase = 1;
-    else if (day <= 30) phase = 2;
-    else phase = 3;
+  // Day-specific questions
+  let dayQs = seedQuestions.filter((q) => q.day === day);
 
-    const phaseFiltered = pool.filter((q) => q.phase === phase);
-    if (phaseFiltered.length >= count) {
-      pool = phaseFiltered;
+  // If insufficient, pad with same-world questions
+  if (dayQs.length < count - reviewQs.length) {
+    const world = getWorldForDay(day);
+    if (world) {
+      const worldQs = seedQuestions.filter((q) => {
+        if (!q.day) return false;
+        const qWorld = getWorldForDay(q.day);
+        return qWorld?.id === world.id && q.day !== day;
+      });
+      dayQs = [...dayQs, ...shuffle(worldQs)];
     }
   }
 
-  // Shuffle using Fisher-Yates
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
+  // Remove duplicates with review questions
+  const reviewIds = new Set(reviewQs.map((q) => q.id));
+  dayQs = dayQs.filter((q) => !reviewIds.has(q.id));
 
-  return pool.slice(0, count);
+  // Combine: review first, then day questions
+  const combined = [...shuffle(reviewQs), ...shuffle(dayQs)];
+
+  return combined.slice(0, count);
+}
+
+export function getQuestionsForDays(dayStart: number, dayEnd: number): Question[] {
+  return seedQuestions.filter((q) => q.day !== undefined && q.day >= dayStart && q.day <= dayEnd);
+}
+
+export function getQuestionsForWorld(worldId: string): Question[] {
+  return seedQuestions.filter((q) => {
+    if (!q.day) return false;
+    const world = getWorldForDay(q.day);
+    return world?.id === worldId;
+  });
 }

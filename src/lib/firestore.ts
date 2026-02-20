@@ -19,6 +19,9 @@ export function getUserProfile(): UserProfile | null {
   if (profile.hearts === undefined) profile.hearts = 5;
   if (profile.heartsLastRegen === undefined) profile.heartsLastRegen = Date.now();
   if (profile.battleHistory === undefined) profile.battleHistory = [];
+  if (profile.heroCredits === undefined) profile.heroCredits = 0;
+  if (profile.mockTestTokens === undefined) profile.mockTestTokens = 2;
+  if (profile.unlockedDay === undefined) profile.unlockedDay = profile.currentDay || 1;
   return profile;
 }
 
