@@ -9,6 +9,7 @@ export interface Question {
   topic: string;
   difficulty: 1 | 2 | 3;
   phase: 1 | 2 | 3;
+  day?: number;
 }
 
 export interface UserProfile {
@@ -27,6 +28,9 @@ export interface UserProfile {
   hearts: number;
   heartsLastRegen: number;
   battleHistory: BattleResult[];
+  heroCredits: number;
+  mockTestTokens: number;
+  unlockedDay: number;
 }
 
 export interface DailyProgress {
@@ -35,6 +39,11 @@ export interface DailyProgress {
   correct: number;
   timeSpent: number;
   answers: QuizAnswer[];
+  dayNumber?: number;
+  attempts?: number;
+  passed?: boolean;
+  lastAttemptAt?: number;
+  score?: number;
 }
 
 export interface QuizAnswer {
@@ -60,3 +69,57 @@ export interface BattleResult {
 
 export type Exam = "DHA" | "MOH" | "SLE" | "HAAD";
 export type Specialty = "medicine" | "nursing" | "pharmacy" | "dentistry";
+
+// Gulf Schedule types
+export interface GulfDay {
+  day: number;
+  topics: string[];
+  subtopics: string[];
+  worldId: string;
+}
+
+export interface World {
+  id: string;
+  name: string;
+  color: string;
+  icon: string;
+  dayStart: number;
+  dayEnd: number;
+  description: string;
+}
+
+// Question history for spaced repetition
+export interface QuestionHistory {
+  questionId: string;
+  dayNumber: number;
+  attempts: number;
+  correct: number;
+  lastSeen: number;
+}
+
+// Mock test types
+export interface MockTestResult {
+  id: string;
+  type: "milestone" | "final";
+  milestone?: number;
+  score: number;
+  total: number;
+  timeSpent: number;
+  completedAt: number;
+  perWorldBreakdown: Record<string, { correct: number; total: number }>;
+}
+
+// Cooldown state
+export interface CooldownState {
+  dayNumber: number;
+  attempts: number;
+  lockedUntil: number;
+}
+
+// Lounge types
+export interface LoungeMessage {
+  id: string;
+  userName: string;
+  text: string;
+  timestamp: number;
+}
